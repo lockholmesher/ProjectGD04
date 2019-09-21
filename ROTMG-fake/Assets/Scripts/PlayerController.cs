@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class PlayerController : PersonController
 {
-    public Transform obj;
+    //public Transform obj;
+    public GameObject player;
+    private Animator anim;
+    private SpriteRenderer flipPlayer;
+    int directionMove = 0;
+    // Direction: 0: idle; 1:right, 2: left, 3: up, 4: down;
+    void Start() {
+        anim = player.GetComponent<Animator>();
+        flipPlayer = player.GetComponent<SpriteRenderer>();
+    }
     void LvlUp(){
 
     }
@@ -22,13 +31,34 @@ public class PlayerController : PersonController
     }
     void DestroyItem(){
         
-    }
-    public void Update()
+    }  
+    public void FixedUpdate()
     {
+       anim.SetInteger("DirectionMove",directionMove);
        float ho = Input.GetAxis("Horizontal");
        float ve = Input.GetAxis("Vertical");
        Vector3 tempVect = new Vector3(ho,ve,0);
-       tempVect = tempVect.normalized*speed*Time.deltaTime;
-       obj.transform.position += tempVect;
+       tempVect = tempVect.normalized*speed*Time.fixedDeltaTime;
+
+       if(ho == 0&&ve ==0){
+            directionMove = 0;
+       }else{
+           //di chuyen nhan vat
+            player.transform.position += tempVect;
+
+            if(ve>0){
+                directionMove = 3;
+            }else if(ve <0){
+                directionMove = 4;
+            }else{
+                if(ho > 0){
+                    directionMove = 1;
+                    flipPlayer.flipX =false;
+                }else{
+                    directionMove = 2;
+                    flipPlayer.flipX =true;
+                }
+            }  
+       } 
     }
 }
