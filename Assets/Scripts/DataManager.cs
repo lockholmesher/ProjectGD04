@@ -3,9 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
 using System;
+using Newtonsoft.Json;
 public class DataManager : SingletionMonoBehaviour<DataManager>
 {
-	public DataGame data;
+	[SerializeField]
+	protected DataGame data;
+	public DataGame GetData()
+	{
+		data = new DataGame();
+		return data;
+	}
 	public DataGame LoadData(string path)
 	{
 		if (!File.Exists(Application.dataPath + "/Resources/" + path))
@@ -22,10 +29,16 @@ public class DataManager : SingletionMonoBehaviour<DataManager>
 		}
 		return null;
 	}
-	public void SaveData(string path, Texture2D datasave )
+	public void SaveData(string path, Dictionary<int, List<ColorTex>> datasave)
 	{
-		DataGame save = new DataGame { colorTexture = datasave };
+		Debug.Log("Save data" + datasave.Count);
+		DataGame save = new DataGame() { lis = datasave };
+		//string test = JsonConvert.SerializeObject(save, Formatting.Indented);
+		
+		//Debug.Log(test);
 		string json = JsonUtility.ToJson(save);
+		
+		Debug.Log(json);
 		File.WriteAllText(Application.dataPath + "/Resources/" + path, json);
 
 	}
@@ -33,6 +46,22 @@ public class DataManager : SingletionMonoBehaviour<DataManager>
 [SerializeField]
 public class DataGame
 {
-	public Texture2D colorTexture;
-	
+	public Dictionary<int, List<ColorTex>> lis = new Dictionary<int, List<ColorTex>>();
+	public string SaveToJSON()
+	{
+		return JsonUtility.ToJson(this);
+	}
+
+}
+
+[SerializeField]
+public class ColorTex
+{
+	public Color colorTexture;
+	public Vector2 pos;
+	public ColorTex(Color color, Vector2 pos)
+	{
+		this.colorTexture = color;
+		this.pos = pos;
+	}
 }
