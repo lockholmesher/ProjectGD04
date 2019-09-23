@@ -11,28 +11,67 @@ public class TestColor : SingletionMonoBehaviour<TestColor>/*, IPointerUpHandler
 	public Texture2D test;
 
 	public Texture2D texture;
-	Dictionary<int, List<ColorTex>> listRally = new Dictionary<int, List<ColorTex>>();
-    int count = 0;
-    public List<ListLock> locks = new List<ListLock>();
 
-	public DataGame data;
+	public Texture2D texCurrent;
+
+	Dictionary<int, List<ColorTex>> lisData;
+
+	int count = 0;
+   
+
 	void Start()
     {
 
 		DataManager.Instance.LoadData("data.json");
 		//get khoang mau # nhau
-		var lisData = DataManager.Instance.GetData().lis;
+		lisData = DataManager.Instance.GetData().lis;
 		var liscolor = GetlistColorForTextture(test.GetPixels());
 		for (int i = 0; i < liscolor.Count; i++)
 		{
 			lisData.Add(i, LoadArrColor(liscolor[i]));
 		}
 		Debug.Log(lisData.Count);
-		DataManager.Instance.SaveData("data.json", lisData);
+		ClearColor(texture);
+		
+		//DataManager.Instance.SaveData("data.json", lisData);
 		//Debug.Log(DataManager.Instance.LoadData("data.json").lis.Count);
 	}
 
-	
+	public void Spawn(Vector2 posi)
+	{
+		Debug.Log(posi);
+		Debug.Log(texCurrent.GetPixel((int)posi.x,(int)posi.y));
+		for (int i = 0; i < lisData.Count; i++)
+		{
+			if(test.GetPixel((int)posi.x,(int)posi.y)  == lisData[i][0].colorTexture )
+			{
+				SpawnArr(i);
+				return;
+			}
+		}
+	}
+	public void SpawnArr(int keyvalue)
+	{
+		for( int i = 0; i < lisData[keyvalue].Count;i++)
+		{
+			texture.SetPixel((int)lisData[keyvalue][i].pos.x, (int)lisData[keyvalue][i].pos.y, texCurrent.GetPixel((int)lisData[keyvalue][i].pos.x, (int)lisData[keyvalue][i].pos.y));
+		}
+		texture.Apply();
+	}
+	public void ClearColor(Texture2D tex)
+	{
+		for(int i = 0; i < 299; i++)
+		{
+			for(int j = 0; j < 299; j++)
+			{
+				if (tex.GetPixel(i,j) != Color.black)
+				{
+					tex.SetPixel(i, j, Color.white);
+				}
+			}
+		}
+		tex.Apply();
+	}
 	
 	public List<Color> GetlistColorForTextture(Color[] colors)
 	{
@@ -110,20 +149,20 @@ public class TestColor : SingletionMonoBehaviour<TestColor>/*, IPointerUpHandler
 		}
 		return lis;
 	}
-	public void ClearColor(Texture2D texcolor)
-	{
-		for (int i = 0; i < 512; i++)
-		{
-			for (int j = 0; j < 512; j++)
-			{
+	//public void ClearColor(Texture2D texcolor)
+	//{
+	//	for (int i = 0; i < 512; i++)
+	//	{
+	//		for (int j = 0; j < 512; j++)
+	//		{
 
-				//Color color = ((texcolor.GetPixel(i, j).r & texcolor.GetPixel(i, j).g) != 0 ? Color.white : Color.red);
-				texcolor.SetPixel(i, j, Color.white);
+	//			//Color color = ((texcolor.GetPixel(i, j).r & texcolor.GetPixel(i, j).g) != 0 ? Color.white : Color.red);
+	//			texcolor.SetPixel(i, j, Color.white);
 
-			}
-		}
-		texcolor.Apply();
-	}
+	//		}
+	//	}
+	//	texcolor.Apply();
+	//}
 
 	void SetupData()
 	{

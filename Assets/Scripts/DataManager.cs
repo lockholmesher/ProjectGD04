@@ -4,6 +4,7 @@ using UnityEngine;
 using System.IO;
 using System;
 using Newtonsoft.Json;
+
 public class DataManager : SingletionMonoBehaviour<DataManager>
 {
 	[SerializeField]
@@ -33,12 +34,10 @@ public class DataManager : SingletionMonoBehaviour<DataManager>
 	{
 		Debug.Log("Save data" + datasave.Count);
 		DataGame save = new DataGame() { lis = datasave };
-		//string test = JsonConvert.SerializeObject(save, Formatting.Indented);
-		
-		//Debug.Log(test);
+		string test = JsonConvert.SerializeObject(save, Formatting.Indented);
+		Debug.Log(test);
 		string json = JsonUtility.ToJson(save);
 		
-		Debug.Log(json);
 		File.WriteAllText(Application.dataPath + "/Resources/" + path, json);
 
 	}
@@ -49,6 +48,7 @@ public class DataGame
 	public Dictionary<int, List<ColorTex>> lis = new Dictionary<int, List<ColorTex>>();
 	public string SaveToJSON()
 	{
+		
 		return JsonUtility.ToJson(this);
 	}
 

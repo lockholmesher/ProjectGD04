@@ -27,7 +27,7 @@ public class UIButton : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, I
         //transform.localScale = localScaleOld * 1.2f;
         //TestColor.Instance.ClickDrawnColor(data.position);
         //Debug.Log(GetComponent<RawImage>().texture.width);
-        //TestColor.Instance.DisplayCountColor((int)data.position.x, (int)data.position.y);
+        TestColor.Instance.Spawn(data.position);
     }
 
     public void OnPointerClick(PointerEventData data)
