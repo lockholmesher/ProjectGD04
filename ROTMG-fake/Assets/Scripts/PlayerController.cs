@@ -5,12 +5,13 @@ using UnityEngine;
 public class PlayerController : PersonController
 {
     //public Transform obj;
-    public GameObject player;
+    public Rigidbody2D player;
     private Animator anim;
     private SpriteRenderer flipPlayer;
     int directionMove = 0;
     // Direction: 0: idle; 1:right, 2: left, 3: up, 4: down;
     void Start() {
+        player = GetComponent<Rigidbody2D>();
         anim = player.GetComponent<Animator>();
         flipPlayer = player.GetComponent<SpriteRenderer>();
     }
