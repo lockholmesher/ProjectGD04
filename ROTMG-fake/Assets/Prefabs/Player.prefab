@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 4470789757670148958}
   - component: {fileID: 359041689922545560}
   - component: {fileID: 4449839604293642266}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 4470789757670148954}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: 1, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -115,6 +115,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aad1909986caf4c8ba6228613b45b506, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 5
+  speed: 3
+  bulletPrefab: {fileID: 2731884571441993713, guid: a5e22bf8f73e4994b8ee81f451ea86a2,
+    type: 3}
 --- !u!50 &359041689922545560
 Rigidbody2D:
   serializedVersion: 4
@@ -149,7 +153,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.06455006, y: 0.11766529}
+  m_Offset: {x: 0.0027414262, y: 0.5003157}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0}
@@ -160,5 +164,5 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.6325612, y: 0.23533058}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
