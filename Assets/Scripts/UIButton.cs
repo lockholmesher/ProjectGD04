@@ -17,24 +17,21 @@ public class UIButton : MonoBehaviour, IPointerUpHandler, IPointerDownHandler, I
 
     public void OnPointerUp(PointerEventData data)
     {
-        //transform.localScale = Vector3.one;
+        transform.localScale = Vector3.one;
         transform.localScale = localScaleOld;
     }
 
     public void OnPointerDown(PointerEventData data)
     {
-		//transform.localScale = Vector3.one * 1.2f;
-		//transform.localScale = localScaleOld * 1.2f;
-		Debug.Log(data.position);
+		transform.localScale = Vector3.one * 1.2f;
+		transform.localScale = localScaleOld * 1.2f;
+		
     }
 
     public void OnPointerClick(PointerEventData data)
     {
         ClickEvent.Invoke();
-        if(gameObject.name == "SkeletonGraphic(bird)")
-        {
-            gameObject.SetActive(false);
-        }
+        
     }
 
     public void SetUpEvent(UnityAction action)

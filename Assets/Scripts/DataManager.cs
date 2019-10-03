@@ -8,6 +8,8 @@ public class DataManager : SingletionMonoBehaviour<DataManager>
 {
 	[SerializeField]
 	protected DataGame data;
+
+	private List<Vector2> listNumber;
 	public DataGame GetData()
 	{
 		data = new DataGame();
@@ -41,6 +43,8 @@ public class DataManager : SingletionMonoBehaviour<DataManager>
 		File.WriteAllText(Application.dataPath + "/Resources/" + path, json);
 
 	}
+
+	
 }
 [SerializeField]
 public class DataGame

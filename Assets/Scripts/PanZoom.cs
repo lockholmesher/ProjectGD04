@@ -7,14 +7,24 @@ public class PanZoom : MonoBehaviour
 	Vector3 touchStart;
 	public float zoomOutMin = 1;
 	public float zoomOutMax = 8;
-	public Vector3 touchCheck;
 
-	// Update is called once per frame
+	Vector3 touchDown;
+
+	Vector3 posCameraUPdate;
+
+	Vector3 posBegin;
+
+	public void Start()
+	{
+		
+	}
 	void Update()
 	{
 		if (Input.GetMouseButtonDown(0))
 		{
 			touchStart = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			touchDown = Camera.main.transform.position;
+			posBegin = Input.mousePosition;
 		}
 		if (Input.touchCount == 2)
 		{
@@ -33,15 +43,52 @@ public class PanZoom : MonoBehaviour
 		}
 		else if (Input.GetMouseButton(0))
 		{
-			Vector3 direction = touchStart - Camera.main.ScreenToWorldPoint(Input.mousePosition);
-			Debug.Log(touchStart);
-			Camera.main.transform.position += direction;
+			if(posBegin.y > 100)
+			{
+				float realWidth = Screen.width / 100f;
+				float realHeight = Screen.height / 100f;
+
+				Vector3 direction = touchStart - Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+				posCameraUPdate = Camera.main.transform.position;
+
+				if (posCameraUPdate.x + direction.x < 15f && posCameraUPdate.x + direction.x > -15f && posCameraUPdate.y + direction.y > -9 && posCameraUPdate.y + direction.y < 9f)
+				{
+					Camera.main.transform.position += direction;
+				}
+			}
+			
+
+
 		}
+		if (Input.GetMouseButtonUp(0))
+		{
+			Vector2 touchPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+			if (touchPos.x <= transform.position.x + 5f && touchPos.x >= transform.position.x - 5f &&
+				touchPos.y <= transform.position.y + 5f && touchPos.y >= transform.position.y - 5f)
+			{
+				if (touchDown == posCameraUPdate)
+				{
+					SetColorTexture(touchPos);
+				}
+			}
+			
+			
+			
+		}
+
 		zoom(Input.GetAxis("Mouse ScrollWheel"));
 	}
+	public void SetColorTexture(Vector2 pos)
+	{
+		Debug.Log(pos);
+		ColorController.Instance.Spawn(new Vector2((pos.x + 5) * 50, (pos.y + 5) * 50));
+	}
 
-	void zoom(float increment)
+	public	void zoom(float increment)
 	{
 		Camera.main.orthographicSize = Mathf.Clamp(Camera.main.orthographicSize - increment, zoomOutMin, zoomOutMax);
 	}
+
+
 }
