@@ -17,8 +17,10 @@ public class CameraScreen : Singleton<CameraScreen>
 
     public static float screenWidth;
 	public static float screenHeight;
+    public static float WidthGame => 1080;
     public static float MaxHeight { get{ return CameraScreen.Instance.gameObject.transform.position.y + screenHeight * 0.5f; }}
     public static float MinHeight { get{ return CameraScreen.Instance.gameObject.transform.position.y - screenHeight * 0.5f; }}
+    public static Vector3 Position => CameraScreen.Instance.transform.position;
 
     protected override void Awake()
     {
@@ -76,5 +78,21 @@ public class CameraScreen : Singleton<CameraScreen>
             cooldown += Time.deltaTime;
         }
         Camera.main.transform.position = initPos;
+    }
+
+    public static Vector3 GetRealPosition(Vector3 input, bool fromBot)
+    {
+        float rate = input.x / WidthGame;
+        input.x = rate * Screen.width;
+        if(fromBot)
+        {
+            input += new Vector3(Position.x, MinHeight, 0);
+        }
+        else
+        {
+            input += new Vector3(Position.x, Position.y, 0);
+        }
+
+        return input;
     }
 }
