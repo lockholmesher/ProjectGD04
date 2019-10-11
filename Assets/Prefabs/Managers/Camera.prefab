@@ -139,3 +139,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedRateDrop: 1
   target: {fileID: 0}
+  speedChange: 2
+  rangeRateDrop:
+    min: 0.75
+    max: 1.5
