@@ -12,7 +12,10 @@ public class PlayerController : Player
     protected override void Update()
     {
         base.Update();
-        HandleInput();
+        if(Game.Instance.state == GameState.PLAYING)
+        {
+            HandleInput();
+        }
     }
 
     protected override void FixedUpdate()

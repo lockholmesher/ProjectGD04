@@ -10,33 +10,42 @@ public class Game : Singleton<Game>
     public static Vector2 Gravity{ get{return Game.Instance.gravityScale * Game.Instance.gravity; }}
 
 
-    [HideInInspector] public GameStatus status;
+    [HideInInspector] public GameState state;
+    public int coinPerLevel{get; private set;}
 
     protected override void Awake()
     {
         base.Awake();
-        Events.ON_MENU += Menu;
-        Events.ON_PLAY += Play;
-        Events.ON_DEFEAT += Defeat;
     }
 
     void Start()
     {
-        Events.ON_PLAY();
+        coinPerLevel = 0;
     }
 
-    void Menu()
+    public void Menu()
     {
-        status = GameStatus.WELCOM;
+        state = GameState.WELCOM;
     }
 
-    void Play()
+    public void Play()
     {
-        status = GameStatus.PLAYING;
+        state = GameState.PLAYING;
+        ObstacleSpawner.Instance.StartSpawn(true);
     }
 
-    void Defeat()
+    public void Defeat()
     {
-        status = GameStatus.DEFEAT;
+        state = GameState.DEFEAT;
+    }
+
+    public void Victory()
+    {
+        state = GameState.VICTORY;
+    }
+
+    public void Continue()
+    {
+        
     }
 }

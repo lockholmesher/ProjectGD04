@@ -12,8 +12,6 @@ public class ObstacleSpawner : Singleton<ObstacleSpawner>
     void Start()
     {
         ObstacleObserver.Instance.Add(Define.TOPIC_END_OBSTALCE, OnReceivedOData);
-
-        StartSpawn(true);
     }
 
     public void StartSpawn(bool isLinear)
