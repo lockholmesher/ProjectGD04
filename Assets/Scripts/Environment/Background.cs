@@ -52,12 +52,12 @@ public class Background : MonoBehaviour
     private void SpawnPairSide(float y)
     {
         var left = PoolObjects.Instance.GetFreeObject(side, transform);
-        left.transform.position = new Vector2(xLeft, y);
+        left.transform.position = new Vector3(xLeft, y, transform.position.z);
         Vector2 scale = left.transform.localScale;
         left.transform.localScale = new Vector2(Mathf.Abs(scale.x), Mathf.Abs(scale.y));
 
         var right = PoolObjects.Instance.GetFreeObject(side, transform);
-        right.transform.position = new Vector2(xRight, y);
+        right.transform.position = new Vector3(xRight, y, transform.position.z);
         scale = right.transform.localScale;
         right.transform.localScale = new Vector2(-Mathf.Abs(scale.x), Mathf.Abs(scale.y));
 
