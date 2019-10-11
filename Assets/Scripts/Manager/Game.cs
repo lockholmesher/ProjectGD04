@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Game : Singleton<Game>
 {
@@ -15,6 +16,9 @@ public class Game : Singleton<Game>
 
     protected override void Awake()
     {
+        if(Boot.Instance == null) 
+            SceneManager.LoadScene("Boot");
+            
         base.Awake();
     }
 
