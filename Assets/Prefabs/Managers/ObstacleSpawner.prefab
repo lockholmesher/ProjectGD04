@@ -43,3 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 909fbad96da63364993847a46d3601db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  delaySpawn: 2
+  patternSpawn:
+  - {fileID: 11400000, guid: 1e32f8b635133c94ca8ff99911836dcf, type: 2}

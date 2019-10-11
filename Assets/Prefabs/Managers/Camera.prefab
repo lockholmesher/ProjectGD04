@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 5208506666021338930}
   - component: {fileID: 5208506666021338929}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -138,3 +138,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speedRateDrop: 1
+  target: {fileID: 0}

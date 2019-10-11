@@ -82,7 +82,7 @@ public class CameraScreen : Singleton<CameraScreen>
 
     public static Vector3 GetRealPosition(Vector3 input, bool fromBot)
     {
-        float rate = input.x / WidthGame;
+        float rate = input.x / (WidthGame * 0.5f);
         input.x = rate * Screen.width;
         if(fromBot)
         {

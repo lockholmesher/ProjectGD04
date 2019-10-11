@@ -14,12 +14,17 @@ public class Pattern : ScriptableObject
 
     public SpawnPosition[] obstacles;
 
+    [HideInInspector] public int numberSpawned = 0;
+
     public void Spawn()
     {
+        numberSpawned = 0;
+        
         foreach(var obs in obstacles)
         {
             Vector3 position = CameraScreen.GetRealPosition(obs.position, true);
             obs.obstacle.Spawn(position);
+            numberSpawned++;
         }
     }
 }

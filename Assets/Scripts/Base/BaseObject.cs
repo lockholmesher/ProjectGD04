@@ -8,7 +8,7 @@ public abstract class BaseObject : MonoBehaviour
     [Header("Base Object")]
     public float speedRateDrop = 1;
 
-    new Rigidbody2D rigidbody;
+    protected new Rigidbody2D rigidbody;
 
     protected virtual void Awake()
     {
