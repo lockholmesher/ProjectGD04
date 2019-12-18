@@ -3,7 +3,10 @@ guid: 83539d3de29f90e40be366e11b041a06
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - collider2D: {instanceID: 0}
+  - bombbang: {fileID: 8712013085100305523, guid: c69b74570383a5140931171e7f10993a,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
